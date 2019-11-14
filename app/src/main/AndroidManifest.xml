@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.DescricaoActivity"></activity>
-        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.acitivty.DescricaoActivity"></activity>
+        <activity android:name=".view.acitivty.MainActivity" />
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".view.acitivty.SplashActivity"
             android:theme="@style/Activity.TelaCheia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

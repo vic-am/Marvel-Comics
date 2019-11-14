@@ -1,4 +1,4 @@
-package br.com.digitalhouse.marvelscomics.view;
+package br.com.digitalhouse.marvelscomics.view.acitivty;
 
 import android.content.Intent;
 import android.os.Bundle;

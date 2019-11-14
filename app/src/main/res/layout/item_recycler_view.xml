@@ -30,7 +30,7 @@
         android:background="@null">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/comicTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="6dp"
