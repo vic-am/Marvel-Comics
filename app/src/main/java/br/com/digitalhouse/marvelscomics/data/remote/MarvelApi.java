@@ -6,7 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MarvelApi {
-    @GET("comics")
+    @GET("comics?")
     Observable<Comics> getAllComics(
             @Query("format") String format,
             @Query("formatType") String formatType,

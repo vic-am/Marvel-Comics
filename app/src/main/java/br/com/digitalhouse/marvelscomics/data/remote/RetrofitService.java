@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    private static final String BASE_URL = "https://gateway.marvel.com/v1/public/";
+    private static final String BASE_URL = "https://gateway.marvel.com:443/v1/public/";
     private static Retrofit retrofit;
 
     private static Retrofit getRetrofit() {

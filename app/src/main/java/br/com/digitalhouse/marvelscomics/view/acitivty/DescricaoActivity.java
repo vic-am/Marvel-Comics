@@ -1,16 +1,58 @@
 package br.com.digitalhouse.marvelscomics.view.acitivty;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.squareup.picasso.Picasso;
+
 import br.com.digitalhouse.marvelscomics.R;
+import br.com.digitalhouse.marvelscomics.model.pojo.Result;
 
 public class DescricaoActivity extends AppCompatActivity {
+
+    private static final String COMIC_KEY = "comic";
+    private ImageView imagemFundo;
+    private ImageView imagemComic;
+    private TextView textTitulo;
+    private TextView textDescricao;
+    private TextView textPublicacao;
+    private TextView textPreco;
+    private TextView textPaginas;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_descricao);
+
+        initViews();
+
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            Result result = getIntent().getExtras().getParcelable(COMIC_KEY);
+
+            Picasso.get().load(result.getImages().get(0).getPath() + ".jpg").into(imagemComic);
+            Picasso.get().load(result.getThumbnail().getPath() + ".jpg").into(imagemFundo);
+            textTitulo.setText(result.getTitle());
+            textDescricao.setText(result.getDescription());
+            textPublicacao.setText(result.getModified());
+            textPreco.setText(result.getPrices().get(0).getType());
+            textPaginas.setText(result.getFormat());
+
+        }
+    }
+
+    public void initViews() {
+        imagemFundo = findViewById(R.id.fundoImageView);
+        imagemComic = findViewById(R.id.comicImageView);
+        textTitulo = findViewById(R.id.tituloTextView);
+        textDescricao = findViewById(R.id.descricaoTextView);
+        textPublicacao = findViewById(R.id.publicacaoTextView);
+        textPreco = findViewById(R.id.precoTextView);
+        textPaginas = findViewById(R.id.paginasTextView);
+
     }
 }

@@ -13,7 +13,6 @@ import java.util.List;
 import br.com.digitalhouse.marvelscomics.Repository.ComicsRepository;
 import br.com.digitalhouse.marvelscomics.model.pojo.Comics;
 import br.com.digitalhouse.marvelscomics.model.pojo.Result;
-import br.com.digitalhouse.marvelscomics.model.pojo.TextObject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -25,8 +24,10 @@ public class MainActivityViewModel extends AndroidViewModel {
     private MutableLiveData<List<Result>> listaComics = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private MutableLiveData<String> comicsLiveDataError = new MutableLiveData<>();
+
     private ComicsRepository repository = new ComicsRepository();
     private CompositeDisposable disposable = new CompositeDisposable();
+
     public static final String PUBLIC_KEY = "6eb7e8896ec5850c52515a8a23ee97f0";
     public static final String PRIVATE_KEY = "0dd0c16fedb8a02985977eafca66b49f5e6a526f";
     String ts = Long.toString(System.currentTimeMillis() / 1000);
@@ -49,15 +50,17 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
 
-    public void getAllComics(String format, String formatType, boolean noVariants,
-                             String orderBy, String ts, String hash, String apiKey) {
+    public void getAllComics() {
         disposable.add(
-                repository.getComics(format, formatType, noVariants, orderBy, ts, hash, apiKey)
+                repository.getComicsRepository("magazine", "comic",
+                        true, "title", ts, hash, PUBLIC_KEY)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSubscribe(disposable1 -> loading.setValue(true))
                         .doOnTerminate(() -> loading.setValue(false))
-                        .subscribe(result -> listaComics.setValue(result.getData().getResults()),
+                        .subscribe(comics -> {
+                                    listaComics.setValue(comics.getData().getResults());
+                                },
                                 throwable -> {
                                     Log.i("LOG", "erro " + throwable.getMessage());
                                 })

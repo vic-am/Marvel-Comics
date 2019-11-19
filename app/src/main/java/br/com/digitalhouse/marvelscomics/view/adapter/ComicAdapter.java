@@ -14,15 +14,17 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.digitalhouse.marvelscomics.R;
-import br.com.digitalhouse.marvelscomics.model.pojo.Comics;
 import br.com.digitalhouse.marvelscomics.model.pojo.Result;
+import br.com.digitalhouse.marvelscomics.view.click.OnClick;
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> {
 
     private List<Result> comicsList;
+    private OnClick listener;
 
-    public ComicAdapter(List<Result> comicsList) {
+    public ComicAdapter(List<Result> comicsList, OnClick listener) {
         this.comicsList = comicsList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,6 +39,10 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Result result = comicsList.get(position);
         holder.onBind(result);
+
+        holder.itemView.setOnClickListener((View v) -> {
+            listener.comicsOnClick(result);
+        });
 
     }
 
@@ -70,7 +76,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
         public void onBind(Result result) {
 
             comicText.setText(result.getTitle());
-            Picasso.get().load(result.getThumbnail().getPath()).into(comicImage);
+            Picasso.get().load(result.getThumbnail().getPath() + ".jpg").into(comicImage);
 
         }
     }

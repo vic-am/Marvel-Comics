@@ -42,20 +42,20 @@ public class Data {
         this.offset = offset;
     }
 
-    public List<Result> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Result> results) {
-        this.results = results;
-    }
-
     public Long getTotal() {
         return total;
     }
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public List<Result> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
     }
 
 }

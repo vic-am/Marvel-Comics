@@ -1,11 +1,14 @@
 
 package br.com.digitalhouse.marvelscomics.model.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
-public class Result {
+public class Result implements Parcelable {
 
     @Expose
     private Characters characters;
@@ -298,4 +301,13 @@ public class Result {
         this.variants = variants;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+    }
 }

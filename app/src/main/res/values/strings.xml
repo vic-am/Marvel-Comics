@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Marvels Comics</string>
+    <string name="text_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In blandit nec turpis eget porttitor. Fusce quis velit eleifend, feugiat purus non, elementum arcu. Nulla iaculis non arcu non consequat. Aliquam ut blandit felis. In hac habitasse platea dictumst. Curabitur est ex, facilisis a eleifend nec, pulvinar eget erat.</string>
+    <string name="text_titulo_comic">AMAZING SPIDER-MAN (2014) #1 (MHAN VARIANT)</string>
 </resources>

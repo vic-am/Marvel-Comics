@@ -6,15 +6,15 @@ import com.google.gson.annotations.Expose;
 public class Price {
 
     @Expose
-    private Long price;
+    private Double price;
     @Expose
     private String type;
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
