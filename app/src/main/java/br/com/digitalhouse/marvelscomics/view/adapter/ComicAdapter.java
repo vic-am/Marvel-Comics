@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.digitalhouse.marvelscomics.R;
@@ -36,12 +37,15 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Result result = comicsList.get(position);
+    public void onBindViewHolder(@NonNull ComicAdapter.ViewHolder holder, int position) {
+        final Result result = comicsList.get(position);
         holder.onBind(result);
 
-        holder.itemView.setOnClickListener((View v) -> {
-            listener.comicsOnClick(result);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.comicsOnClick(result);
+            }
         });
 
     }

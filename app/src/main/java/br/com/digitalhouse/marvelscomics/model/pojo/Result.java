@@ -69,6 +69,52 @@ public class Result implements Parcelable {
     @Expose
     private List<Object> variants;
 
+    protected Result(Parcel in) {
+        description = in.readString();
+        diamondCode = in.readString();
+        if (in.readByte() == 0) {
+            digitalId = null;
+        } else {
+            digitalId = in.readLong();
+        }
+        ean = in.readString();
+        format = in.readString();
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        isbn = in.readString();
+        issn = in.readString();
+        if (in.readByte() == 0) {
+            issueNumber = null;
+        } else {
+            issueNumber = in.readLong();
+        }
+        modified = in.readString();
+        if (in.readByte() == 0) {
+            pageCount = null;
+        } else {
+            pageCount = in.readLong();
+        }
+        resourceURI = in.readString();
+        title = in.readString();
+        upc = in.readString();
+        variantDescription = in.readString();
+    }
+
+    public static final Creator<Result> CREATOR = new Creator<Result>() {
+        @Override
+        public Result createFromParcel(Parcel in) {
+            return new Result(in);
+        }
+
+        @Override
+        public Result[] newArray(int size) {
+            return new Result[size];
+        }
+    };
+
     public Characters getCharacters() {
         return characters;
     }
@@ -308,6 +354,40 @@ public class Result implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(description);
+        dest.writeString(diamondCode);
+        if (digitalId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(digitalId);
+        }
+        dest.writeString(ean);
+        dest.writeString(format);
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(isbn);
+        dest.writeString(issn);
+        if (issueNumber == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(issueNumber);
+        }
+        dest.writeString(modified);
+        if (pageCount == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(pageCount);
+        }
+        dest.writeString(resourceURI);
+        dest.writeString(title);
+        dest.writeString(upc);
+        dest.writeString(variantDescription);
     }
 }

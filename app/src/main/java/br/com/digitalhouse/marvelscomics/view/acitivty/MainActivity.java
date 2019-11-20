@@ -26,7 +26,7 @@ import static br.com.digitalhouse.marvelscomics.viewmodel.MainActivityViewModel.
 
 public class MainActivity extends AppCompatActivity implements OnClick {
 
-    private static final String COMIC_KEY = "comic";
+    public static final String COMIC_KEY = "comic";
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private ComicAdapter comicAdapter;
@@ -72,14 +72,14 @@ public class MainActivity extends AppCompatActivity implements OnClick {
     public void initViews() {
         recyclerView = findViewById(R.id.comicsRecycler);
         progressBar = findViewById(R.id.progressBar);
-        comicAdapter = new ComicAdapter(resultList, listener);
+        comicAdapter = new ComicAdapter(resultList, this);
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         recyclerView.setAdapter(comicAdapter);
     }
 
     @Override
     public void comicsOnClick(Result result) {
-        Intent intent = new Intent(MainActivity.this, DescricaoActivity.class);
+        Intent intent = new Intent(this, DescricaoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(COMIC_KEY, result);
         intent.putExtras(bundle);

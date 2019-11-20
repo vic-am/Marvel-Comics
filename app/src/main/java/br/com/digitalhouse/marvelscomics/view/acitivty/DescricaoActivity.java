@@ -1,6 +1,5 @@
 package br.com.digitalhouse.marvelscomics.view.acitivty;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +11,10 @@ import com.squareup.picasso.Picasso;
 import br.com.digitalhouse.marvelscomics.R;
 import br.com.digitalhouse.marvelscomics.model.pojo.Result;
 
+import static br.com.digitalhouse.marvelscomics.view.acitivty.MainActivity.COMIC_KEY;
+
 public class DescricaoActivity extends AppCompatActivity {
 
-    private static final String COMIC_KEY = "comic";
     private ImageView imagemFundo;
     private ImageView imagemComic;
     private TextView textTitulo;
@@ -34,13 +34,16 @@ public class DescricaoActivity extends AppCompatActivity {
         if (getIntent() != null && getIntent().getExtras() != null) {
             Result result = getIntent().getExtras().getParcelable(COMIC_KEY);
 
-            Picasso.get().load(result.getImages().get(0).getPath() + ".jpg").into(imagemComic);
-            Picasso.get().load(result.getThumbnail().getPath() + ".jpg").into(imagemFundo);
+            /* O código está crashando quando tenta puxar as fotos e o preço*/
+
+//            Picasso.get().load(result.getImages().get(0).getPath() + ".jpg").into(imagemComic);
+//            Picasso.get().load(result.getThumbnail().getPath() + ".jpg").into(imagemFundo);
+
             textTitulo.setText(result.getTitle());
             textDescricao.setText(result.getDescription());
-            textPublicacao.setText(result.getModified());
-            textPreco.setText(result.getPrices().get(0).getType());
-            textPaginas.setText(result.getFormat());
+//            textPublicacao.setText(result.getModified());
+//            textPreco.setText(result.getPrices().get(0).getType());
+//            textPaginas.setText(result.getFormat());
 
         }
     }
