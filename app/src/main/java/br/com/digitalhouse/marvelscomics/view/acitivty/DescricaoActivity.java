@@ -6,8 +6,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.squareup.picasso.Picasso;
-
 import br.com.digitalhouse.marvelscomics.R;
 import br.com.digitalhouse.marvelscomics.model.pojo.Result;
 
@@ -40,8 +38,12 @@ public class DescricaoActivity extends AppCompatActivity {
 //            Picasso.get().load(result.getThumbnail().getPath() + ".jpg").into(imagemFundo);
 
             textTitulo.setText(result.getTitle());
-            textDescricao.setText(result.getDescription());
-//            textPublicacao.setText(result.getModified());
+            if (result.getDescription() == null || result.getDescription().isEmpty()) {
+                textDescricao.setText("Descrição não disponível");
+            } else {
+                textDescricao.setText(result.getDescription());
+            }
+//            textPublicacao.setText(result.getDates().get(0).getDate());
 //            textPreco.setText(result.getPrices().get(0).getType());
 //            textPaginas.setText(result.getFormat());
 
