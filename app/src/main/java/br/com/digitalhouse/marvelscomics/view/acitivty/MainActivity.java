@@ -27,12 +27,15 @@ import static br.com.digitalhouse.marvelscomics.viewmodel.MainActivityViewModel.
 public class MainActivity extends AppCompatActivity implements OnClick {
 
     public static final String COMIC_KEY = "comic";
+    public static final String THUMB_KEY = "thumb";
+    public static final String IMAGE_KEY = "image";
+
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private ComicAdapter comicAdapter;
     private List<Result> resultList = new ArrayList<>();
     private MainActivityViewModel viewModel;
-    private OnClick listener;
+
     String ts = Long.toString(System.currentTimeMillis() / 1000);
     String hash = md5(ts + PRIVATE_KEY + PUBLIC_KEY);
 
@@ -80,8 +83,13 @@ public class MainActivity extends AppCompatActivity implements OnClick {
     @Override
     public void comicsOnClick(Result result) {
         Intent intent = new Intent(this, DescricaoActivity.class);
+
         Bundle bundle = new Bundle();
+
         bundle.putParcelable(COMIC_KEY, result);
+        bundle.putString(THUMB_KEY, result.getThumbnail().getPath());
+        bundle.putString(IMAGE_KEY, result.getImages().get(0).getPath());
+
         intent.putExtras(bundle);
         startActivity(intent);
     }

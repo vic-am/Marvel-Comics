@@ -11,7 +11,6 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import br.com.digitalhouse.marvelscomics.Repository.ComicsRepository;
-import br.com.digitalhouse.marvelscomics.model.pojo.Comics;
 import br.com.digitalhouse.marvelscomics.model.pojo.Result;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -58,12 +57,8 @@ public class MainActivityViewModel extends AndroidViewModel {
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSubscribe(disposable1 -> loading.setValue(true))
                         .doOnTerminate(() -> loading.setValue(false))
-                        .subscribe(comics -> {
-                                    listaComics.setValue(comics.getData().getResults());
-                                },
-                                throwable -> {
-                                    Log.i("LOG", "erro " + throwable.getMessage());
-                                })
+                        .subscribe(comics -> listaComics.setValue(comics.getData().getResults()),
+                                throwable -> Log.i("LOG", "erro " + throwable.getMessage()))
         );
     }
 

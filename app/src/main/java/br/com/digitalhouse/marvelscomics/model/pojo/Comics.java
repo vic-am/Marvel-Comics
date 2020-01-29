@@ -1,9 +1,12 @@
 
 package br.com.digitalhouse.marvelscomics.model.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 
-public class Comics {
+public class Comics implements Parcelable {
 
     @Expose
     private String attributionHTML;
@@ -19,6 +22,28 @@ public class Comics {
     private String etag;
     @Expose
     private String status;
+
+    protected Comics(Parcel in) {
+        attributionHTML = in.readString();
+        attributionText = in.readString();
+        code = in.readInt();
+        copyright = in.readString();
+        data = in.readParcelable(Data.class.getClassLoader());
+        etag = in.readString();
+        status = in.readString();
+    }
+
+    public static final Creator<Comics> CREATOR = new Creator<Comics>() {
+        @Override
+        public Comics createFromParcel(Parcel in) {
+            return new Comics(in);
+        }
+
+        @Override
+        public Comics[] newArray(int size) {
+            return new Comics[size];
+        }
+    };
 
     public String getAttributionHTML() {
         return attributionHTML;
@@ -76,4 +101,19 @@ public class Comics {
         this.status = status;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(attributionHTML);
+        dest.writeString(attributionText);
+        dest.writeInt(code);
+        dest.writeString(copyright);
+        dest.writeParcelable(data, flags);
+        dest.writeString(etag);
+        dest.writeString(status);
+    }
 }
